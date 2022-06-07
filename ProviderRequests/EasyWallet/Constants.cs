@@ -9,7 +9,7 @@
         public static string WithdrawToken = "C073B6C77170074C547AD4978948636EB936C1D655F175D4A744877AF4778542C6408D57";
         public static string ProviderId = "10950";
         public static string Input1 = "+37477605588";
-        public static string Url = "https://test-api.easypay.am/";
+        public static string WithdrawUrl = "https://test-api.easypay.am/";
 
         public static string DepositUrl = "http://195.250.87.195:3003/EPMerchantService.svc";
     }

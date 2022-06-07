@@ -60,19 +60,19 @@ namespace ProviderRequests.EasyWallet
         {
             request.CheckSum = ComputeSignature(Constants.WithdrawToken, request.ProviderID, request.Inputs[0], request.Inputs[1]);
 
-            return await DoRequestAsync<string>(request, Constants.Url, "check");
+            return await DoRequestAsync<string>(request, Constants.WithdrawUrl, "check");
         }
 
         public async Task<string> WithdrawAsync(WithdrawRequest request)
         {
             request.CheckSum = ComputeSignature(request.ProviderID, request.SystemTime, request.Inputs[1], request.Amount);
 
-            return await DoRequestAsync<string>(request, Constants.Url, "pay");
+            return await DoRequestAsync<string>(request, Constants.WithdrawUrl, "pay");
         }
 
         public async Task<string> CheckWithdrawStatusAsync(CheckWithdrawRequest request)
         {
-            return await DoRequestAsync<string>(request, Constants.Url, "getpaymentinfo");
+            return await DoRequestAsync<string>(request, Constants.WithdrawUrl, "getpaymentinfo");
         }
 
         private async Task<string> DoRequestAsync<TResponse>(object requestModel, string url, string method)
