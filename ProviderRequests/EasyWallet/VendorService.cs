@@ -20,12 +20,12 @@ namespace ProviderRequests.EasyWallet
         Task<string> CheckDepositStatusAsync(CheckDepositRequest request);
 
         //ValidatePaymentAccountResponse ამას უნდა აბრუნებდეს მაგრამ ვნახოთ რას დააბრუნებს და მერე გავასწოროთ
-        Task<string> ValidatePaymentAccountAsync(ValidatePaymentAccountRequest request);
+        Task<ValidatePaymentAccountResponse> ValidatePaymentAccountAsync(ValidatePaymentAccountRequest request);
 
-        Task<string> WithdrawAsync(WithdrawRequest request);
+        Task<WithdrawResponse> WithdrawAsync(WithdrawRequest request);
 
         //CheckWithdrawResponse
-        Task<string> CheckWithdrawStatusAsync(CheckWithdrawRequest request);
+        Task<List<WithdrawResponse>> CheckWithdrawStatusAsync(CheckWithdrawRequest request);
     }
 
     public class VendorService : IVendorService
@@ -49,84 +49,112 @@ namespace ProviderRequests.EasyWallet
 
         public async Task<string> CheckDepositStatusAsync(CheckDepositRequest request)
         {
-            request.CheckSum = ComputeSignature(Constants.DepositToken, Constants.MerchantId.ToString(), request.MerchantOrderId);
-
+            request.Checksum = ComputeSignature(Constants.DepositToken, Constants.MerchantId.ToString(), request.MerchantOrderId, request.Guid);
             return await DoRequestAsync<string>(request, Constants.DepositUrl, "checkorder");
 
             //ნუ სანახავია რას და როგორ აბრუნებს სატესტოდ დავწერ
         }
 
-        public async Task<string> ValidatePaymentAccountAsync(ValidatePaymentAccountRequest request)
+        public async Task<ValidatePaymentAccountResponse> ValidatePaymentAccountAsync(ValidatePaymentAccountRequest request)
         {
-            request.CheckSum = ComputeSignature(Constants.WithdrawToken, request.ProviderID, request.Inputs[0], request.Inputs[1]);
+            request.CheckSum = ComputeSignature(Constants.WithdrawToken, request.ProviderId, request.InputValues[0]);
 
-            return await DoRequestAsync<string>(request, Constants.WithdrawUrl, "check");
+            return await DoRequestAsync<ValidatePaymentAccountResponse>(request, Constants.WithdrawUrl, "check");
         }
 
-        public async Task<string> WithdrawAsync(WithdrawRequest request)
+        public async Task<WithdrawResponse> WithdrawAsync(WithdrawRequest request)
         {
-            request.CheckSum = ComputeSignature(request.ProviderID, request.SystemTime, request.Inputs[1], request.Amount);
+            request.CheckSum = ComputeSignature(Constants.WithdrawToken, request.ProviderID, request.SystemTime.ToString("yyyyMMddHHmm"), request.Inputs[0], request.Amount);
 
-            return await DoRequestAsync<string>(request, Constants.WithdrawUrl, "pay");
+            return await DoRequestAsync<WithdrawResponse>(request, Constants.WithdrawUrl, "pay");
         }
 
-        public async Task<string> CheckWithdrawStatusAsync(CheckWithdrawRequest request)
+        public async Task<List<WithdrawResponse>> CheckWithdrawStatusAsync(CheckWithdrawRequest request)
         {
-            return await DoRequestAsync<string>(request, Constants.WithdrawUrl, "getpaymentinfo");
+            return await DoRequestAsync<List<WithdrawResponse>>(request, Constants.WithdrawUrl, "getpaymentinfo");
         }
 
-        private async Task<string> DoRequestAsync<TResponse>(object requestModel, string url, string method)
+        private async Task<TResponse> DoRequestAsync<TResponse>(object requestModel, string url, string method)
         {
-            var httpClient = _httpClientFactory.CreateClient();
-            var message = new HttpRequestMessage(HttpMethod.Post, $"{url}/{method}");
-            var requestBody = JsonConvert.SerializeObject(requestModel, Formatting.None);
-            message.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response;
-            try
+            using (var handler = new HttpClientHandler())
             {
-                response = await httpClient.SendAsync(message);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Error while sending vendor request {Method} {Url}", message.Method, message.RequestUri);
-                return "Vendor request failed";
-            }
+                // allow the bad certificate
+                handler.ServerCertificateCustomValidationCallback = (request, cert, chain, errors) => true;
+                using (var httpClient = new HttpClient(handler))
+                {
+                    //var httpClient = _httpClientFactory.CreateClient();
+                    var message = new HttpRequestMessage(HttpMethod.Post, $"{url}/{method}");
+                    var requestBody = JsonConvert.SerializeObject(requestModel, Formatting.None);
+                    message.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
 
-            var responseContent = await response.Content.ReadAsStringAsync();
-            //_logger.LogVendorHttpResponse(message, response, responseContent);
+                    HttpResponseMessage response;
 
-            if (!response.IsSuccessStatusCode)
-                return "provider error";
-            //return new OperationResult<TResponse>(ErrorCodes.GenericFailed, "Got error from provider");
+                    try
+                    {
+                        response = await httpClient.SendAsync(message);
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        TResponse responseModel;
 
-            var responseModel = "";
-            try
-            {
-                responseModel = JsonConvert.DeserializeObject<string>(responseContent);
+                        try
+                        {
+                            responseModel = JsonConvert.DeserializeObject<TResponse>(responseContent);
+                            return responseModel;
+                        }
+                        catch (Exception e)
+                        {
+                            const string errorMessage = "Can't deserialize response from vendor";
+                            _logger.LogError(e, errorMessage);
+                            //return new OperationResult<TResponse>(ErrorCodes.GenericFailed, errorMessage);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error while sending vendor request {Method} {Url}", message.Method, message.RequestUri);
+                        //return new OperationResult<TResponse>(ErrorCodes.GenericFailed, "Vendor request failed");
+                    }
+                }
             }
-            catch (Exception e)
-            {
-                const string errorMessage = "Can't deserialize response from vendor";
-                _logger.LogError(e, errorMessage);
-                //return new OperationResult<TResponse>(ErrorCodes.GenericFailed, errorMessage);
-            }
+            return default(TResponse);
+            //HttpResponseMessage response;
 
-            return responseModel;
+            //var responseContent = await response.Content.ReadAsStringAsync();
+            ////_logger.LogVendorHttpResponse(message, response, responseContent);
+
+            //if (!response.IsSuccessStatusCode)
+            //    return "provider error";
+            ////return new OperationResult<TResponse>(ErrorCodes.GenericFailed, "Got error from provider");
+
+            //var responseModel = "";
+            //try
+            //{
+            //    responseModel = JsonConvert.DeserializeObject<string>(responseContent);
+            //}
+            //catch (Exception e)
+            //{
+            //    const string errorMessage = "Can't deserialize response from vendor";
+            //    _logger.LogError(e, errorMessage);
+            //    //return new OperationResult<TResponse>(ErrorCodes.GenericFailed, errorMessage);
+            //}
+
+            //return responseModel;
         }
 
         private string ComputeSignature(string secret, params object[] fields)
         {
             var input = string.Join("", fields) + secret;
-            var result = "";
-            using (MD5 md5 = MD5.Create())
+            string result;
+            using (var md5 = MD5.Create())
             {
                 var inputBytes = Encoding.ASCII.GetBytes(input);
                 var hashBytes = md5.ComputeHash(inputBytes);
 
+                _logger.LogDebug("Computing Signature, base string: {Input}", input);
                 result = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+                _logger.LogDebug("Signature result: {Result}", result);
             }
+
             return result;
         }
+
     }
 }

@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="Service" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpBinding_IService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://api.emoney.ge/distributors/Service.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://api.emoney.ge/distributors/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://api.emoney.ge/distributors/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/EmoneyDistributorService.Common" />
+      <xsd:import schemaLocation="https://api.emoney.ge/distributors/Service.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/EmoneyDistributorService.Model" />
+      <xsd:import schemaLocation="https://api.emoney.ge/distributors/Service.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/LB.Shared" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IService_GetServiceGroups_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceGroups" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetServiceGroups_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetRates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRates" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetRates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetServices_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServices" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetServices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetServiceProperties_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceProperties" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetServiceProperties_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServicePropertiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetServiceParameterReferences_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceParameterReferences" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetServiceParameterReferences_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceParameterReferencesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInfo" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_CheckCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckCode" />
+  </wsdl:message>
+  <wsdl:message name="IService_CheckCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_SendCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendCode" />
+  </wsdl:message>
+  <wsdl:message name="IService_SendCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_Pay_InputMessage">
+    <wsdl:part name="parameters" element="tns:Pay" />
+  </wsdl:message>
+  <wsdl:message name="IService_Pay_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PayResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_ConfirmPayment_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConfirmPayment" />
+  </wsdl:message>
+  <wsdl:message name="IService_ConfirmPayment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConfirmPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetTransactionInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionInfo" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetTransactionInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBalance" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetStatement_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStatement" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetStatement_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStatementResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetTransactionDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionDetails" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetTransactionDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_CancelTransaction_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelTransaction" />
+  </wsdl:message>
+  <wsdl:message name="IService_CancelTransaction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetFullTransactionInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFullTransactionInfo" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetFullTransactionInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFullTransactionInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_RegisterParcel_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterParcel" />
+  </wsdl:message>
+  <wsdl:message name="IService_RegisterParcel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterParcelResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GeteMoneyInfoByPrivateID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GeteMoneyInfoByPrivateID" />
+  </wsdl:message>
+  <wsdl:message name="IService_GeteMoneyInfoByPrivateID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GeteMoneyInfoByPrivateIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_PrepareWithdrawFromeMoney_InputMessage">
+    <wsdl:part name="parameters" element="tns:PrepareWithdrawFromeMoney" />
+  </wsdl:message>
+  <wsdl:message name="IService_PrepareWithdrawFromeMoney_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PrepareWithdrawFromeMoneyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_WithdrawFromeMoney_InputMessage">
+    <wsdl:part name="parameters" element="tns:WithdrawFromeMoney" />
+  </wsdl:message>
+  <wsdl:message name="IService_WithdrawFromeMoney_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WithdrawFromeMoneyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_CreateInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateInvoice" />
+  </wsdl:message>
+  <wsdl:message name="IService_CreateInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvoice" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_CancelInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelInvoice" />
+  </wsdl:message>
+  <wsdl:message name="IService_CancelInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IService">
+    <wsdl:operation name="GetServiceGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetServiceGroups" message="tns:IService_GetServiceGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetServiceGroupsResponse" message="tns:IService_GetServiceGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRates">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetRates" message="tns:IService_GetRates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetRatesResponse" message="tns:IService_GetRates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServices">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetServices" message="tns:IService_GetServices_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetServicesResponse" message="tns:IService_GetServices_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceProperties">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetServiceProperties" message="tns:IService_GetServiceProperties_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetServicePropertiesResponse" message="tns:IService_GetServiceProperties_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceParameterReferences">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetServiceParameterReferences" message="tns:IService_GetServiceParameterReferences_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetServiceParameterReferencesResponse" message="tns:IService_GetServiceParameterReferences_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetInfo" message="tns:IService_GetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetInfoResponse" message="tns:IService_GetInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/CheckCode" message="tns:IService_CheckCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/CheckCodeResponse" message="tns:IService_CheckCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/SendCode" message="tns:IService_SendCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/SendCodeResponse" message="tns:IService_SendCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Pay">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/Pay" message="tns:IService_Pay_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/PayResponse" message="tns:IService_Pay_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmPayment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ConfirmPayment" message="tns:IService_ConfirmPayment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ConfirmPaymentResponse" message="tns:IService_ConfirmPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetTransactionInfo" message="tns:IService_GetTransactionInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetTransactionInfoResponse" message="tns:IService_GetTransactionInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetBalance" message="tns:IService_GetBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetBalanceResponse" message="tns:IService_GetBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatement">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetStatement" message="tns:IService_GetStatement_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetStatementResponse" message="tns:IService_GetStatement_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetTransactionDetails" message="tns:IService_GetTransactionDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetTransactionDetailsResponse" message="tns:IService_GetTransactionDetails_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelTransaction">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/CancelTransaction" message="tns:IService_CancelTransaction_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/CancelTransactionResponse" message="tns:IService_CancelTransaction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFullTransactionInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetFullTransactionInfo" message="tns:IService_GetFullTransactionInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetFullTransactionInfoResponse" message="tns:IService_GetFullTransactionInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterParcel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/RegisterParcel" message="tns:IService_RegisterParcel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/RegisterParcelResponse" message="tns:IService_RegisterParcel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GeteMoneyInfoByPrivateID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GeteMoneyInfoByPrivateID" message="tns:IService_GeteMoneyInfoByPrivateID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GeteMoneyInfoByPrivateIDResponse" message="tns:IService_GeteMoneyInfoByPrivateID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PrepareWithdrawFromeMoney">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/PrepareWithdrawFromeMoney" message="tns:IService_PrepareWithdrawFromeMoney_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/PrepareWithdrawFromeMoneyResponse" message="tns:IService_PrepareWithdrawFromeMoney_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="WithdrawFromeMoney">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/WithdrawFromeMoney" message="tns:IService_WithdrawFromeMoney_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/WithdrawFromeMoneyResponse" message="tns:IService_WithdrawFromeMoney_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateInvoice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateInvoice" message="tns:IService_CreateInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/CreateInvoiceResponse" message="tns:IService_CreateInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetInvoice" message="tns:IService_GetInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetInvoiceResponse" message="tns:IService_GetInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelInvoice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/CancelInvoice" message="tns:IService_CancelInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/CancelInvoiceResponse" message="tns:IService_CancelInvoice_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
+    <wsp:PolicyReference URI="#BasicHttpBinding_IService_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetServiceGroups">
+      <soap:operation soapAction="http://tempuri.org/IService/GetServiceGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRates">
+      <soap:operation soapAction="http://tempuri.org/IService/GetRates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServices">
+      <soap:operation soapAction="http://tempuri.org/IService/GetServices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceProperties">
+      <soap:operation soapAction="http://tempuri.org/IService/GetServiceProperties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceParameterReferences">
+      <soap:operation soapAction="http://tempuri.org/IService/GetServiceParameterReferences" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <soap:operation soapAction="http://tempuri.org/IService/GetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckCode">
+      <soap:operation soapAction="http://tempuri.org/IService/CheckCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendCode">
+      <soap:operation soapAction="http://tempuri.org/IService/SendCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Pay">
+      <soap:operation soapAction="http://tempuri.org/IService/Pay" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmPayment">
+      <soap:operation soapAction="http://tempuri.org/IService/ConfirmPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionInfo">
+      <soap:operation soapAction="http://tempuri.org/IService/GetTransactionInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBalance">
+      <soap:operation soapAction="http://tempuri.org/IService/GetBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatement">
+      <soap:operation soapAction="http://tempuri.org/IService/GetStatement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionDetails">
+      <soap:operation soapAction="http://tempuri.org/IService/GetTransactionDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelTransaction">
+      <soap:operation soapAction="http://tempuri.org/IService/CancelTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFullTransactionInfo">
+      <soap:operation soapAction="http://tempuri.org/IService/GetFullTransactionInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterParcel">
+      <soap:operation soapAction="http://tempuri.org/IService/RegisterParcel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GeteMoneyInfoByPrivateID">
+      <soap:operation soapAction="http://tempuri.org/IService/GeteMoneyInfoByPrivateID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrepareWithdrawFromeMoney">
+      <soap:operation soapAction="http://tempuri.org/IService/PrepareWithdrawFromeMoney" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WithdrawFromeMoney">
+      <soap:operation soapAction="http://tempuri.org/IService/WithdrawFromeMoney" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateInvoice">
+      <soap:operation soapAction="http://tempuri.org/IService/CreateInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoice">
+      <soap:operation soapAction="http://tempuri.org/IService/GetInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelInvoice">
+      <soap:operation soapAction="http://tempuri.org/IService/CancelInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="BasicHttpBinding_IService" binding="tns:BasicHttpBinding_IService">
+      <soap:address location="https://api.emoney.ge/distributors/Service.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

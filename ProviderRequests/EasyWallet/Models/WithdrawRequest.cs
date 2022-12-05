@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProviderRequests.EasyWallet.Models
 {
@@ -17,7 +15,7 @@ namespace ProviderRequests.EasyWallet.Models
         public string ProviderID { get; set; }
         public string RangeID { get; set; }
         public string SessionID { get; set; }
-        public string SystemTime { get; set; }
+        public DateTime SystemTime { get; set; }
         public bool NeedReceipt { get; set; }
     }
 }

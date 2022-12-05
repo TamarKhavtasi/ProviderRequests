@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/EmoneyDistributorService.Model" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/EmoneyDistributorService.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://api.emoney.ge/distributors/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="https://api.emoney.ge/distributors/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/EmoneyDistributorService.Common" />
+  <xs:complexType name="ArrayOfParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Parameter" nillable="true" type="tns:Parameter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfParameter" nillable="true" type="tns:ArrayOfParameter" />
+  <xs:complexType name="Parameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Parameter" nillable="true" type="tns:Parameter" />
+  <xs:complexType name="ArrayOfProviderGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProviderGroup" nillable="true" type="tns:ProviderGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProviderGroup" nillable="true" type="tns:ArrayOfProviderGroup" />
+  <xs:complexType name="ProviderGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ImageURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProviderGroup" nillable="true" type="tns:ProviderGroup" />
+  <xs:complexType name="ArrayOfRates">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Rates" nillable="true" type="tns:Rates" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRates" nillable="true" type="tns:ArrayOfRates" />
+  <xs:complexType name="Rates">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BuyRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BuyScale" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Currency1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Currency1Abbr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Currency2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Currency2Abbr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SellRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SellScale" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Rates" nillable="true" type="tns:Rates" />
+  <xs:complexType name="ArrayOfProvider">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Provider" nillable="true" type="tns:Provider" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProvider" nillable="true" type="tns:ArrayOfProvider" />
+  <xs:complexType name="Provider">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ImageURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Provider" nillable="true" type="tns:Provider" />
+  <xs:complexType name="ServiceProperty">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Parameters" nillable="true" type="tns:ArrayOfServiceParameter" />
+      <xs:element minOccurs="0" name="Property" nillable="true" type="tns:Property" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceProperty" nillable="true" type="tns:ServiceProperty" />
+  <xs:complexType name="ArrayOfServiceParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ServiceParameter" nillable="true" type="tns:ServiceParameter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfServiceParameter" nillable="true" type="tns:ArrayOfServiceParameter" />
+  <xs:complexType name="ServiceParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Mask" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Parameters" nillable="true" type="tns:ArrayOfParameterReference" />
+      <xs:element minOccurs="0" name="ServiceID" type="xs:int" />
+      <xs:element minOccurs="0" name="Tooltip" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:ServiceParameterType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceParameter" nillable="true" type="tns:ServiceParameter" />
+  <xs:complexType name="ArrayOfParameterReference">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ParameterReference" nillable="true" type="tns:ParameterReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfParameterReference" nillable="true" type="tns:ArrayOfParameterReference" />
+  <xs:complexType name="ParameterReference">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParameterID" type="xs:long" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ParameterReference" nillable="true" type="tns:ParameterReference" />
+  <xs:simpleType name="ServiceParameterType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Text">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="List">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DateField">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OptionalTextField">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">10</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HiddenEmptyField">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">11</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HiddenFieldWithDefaultValue">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">12</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TwoStepMultiselect">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">15</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TwoStepSingleselect">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MergeWithTransactioncode">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">17</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ServiceParameterType" nillable="true" type="tns:ServiceParameterType" />
+  <xs:complexType name="Property">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CommissionRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Details" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExchangeRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GroupDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupID" type="xs:int" />
+      <xs:element minOccurs="0" name="ImgURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MaxAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="MinAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="MinCommission" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Rounding" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ServiceID" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceType" type="tns:ServiceType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Property" nillable="true" type="tns:Property" />
+  <xs:simpleType name="ServiceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Standard" />
+      <xs:enumeration value="Multicheck" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ServiceType" nillable="true" type="tns:ServiceType" />
+  <xs:complexType name="Transaction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Code" type="xs:long" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:long" />
+      <xs:element minOccurs="0" name="IP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReceiverIdentities" nillable="true" type="tns:ReceiverIdentities" />
+      <xs:element minOccurs="0" name="Status" type="tns:TransactionStatus" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Transaction" nillable="true" type="tns:Transaction" />
+  <xs:complexType name="ReceiverIdentities">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="_nb_first_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_nb_last_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_nb_personal_number" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReceiverIdentities" nillable="true" type="tns:ReceiverIdentities" />
+  <xs:simpleType name="TransactionStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Registered" />
+      <xs:enumeration value="Processing">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Completed">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">10</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Canceled">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-100</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TransactionStatus" nillable="true" type="tns:TransactionStatus" />
+  <xs:complexType name="ArrayOfAccountBalance">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AccountBalance" nillable="true" type="tns:AccountBalance" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAccountBalance" nillable="true" type="tns:ArrayOfAccountBalance" />
+  <xs:complexType name="AccountBalance">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Account" type="xs:long" />
+      <xs:element minOccurs="0" name="Balance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AccountBalance" nillable="true" type="tns:AccountBalance" />
+  <xs:complexType name="ArrayOfStatementEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StatementEntry" nillable="true" type="tns:StatementEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStatementEntry" nillable="true" type="tns:ArrayOfStatementEntry" />
+  <xs:complexType name="StatementEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Code" type="xs:long" />
+      <xs:element minOccurs="0" name="Credit" type="xs:long" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Debit" type="xs:long" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:long" />
+      <xs:element minOccurs="0" name="Status" type="tns:TransactionStatus" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StatementEntry" nillable="true" type="tns:StatementEntry" />
+  <xs:complexType name="ArrayOfTransactionParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TransactionParameter" nillable="true" type="tns:TransactionParameter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTransactionParameter" nillable="true" type="tns:ArrayOfTransactionParameter" />
+  <xs:complexType name="TransactionParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Changed" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ID" type="xs:long" />
+      <xs:element minOccurs="0" name="ParameterCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParameterType" type="xs:long" />
+      <xs:element minOccurs="0" name="ParameterValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TransactionParameter" nillable="true" type="tns:TransactionParameter" />
+  <xs:complexType name="TransactionFull">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Code" type="xs:long" />
+      <xs:element minOccurs="0" name="Commission" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Credit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:long" />
+      <xs:element minOccurs="0" name="IP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Prameters" nillable="true" type="tns:ArrayOfParameter" />
+      <xs:element minOccurs="0" name="Status" type="tns:TransactionStatus" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TransactionFull" nillable="true" type="tns:TransactionFull" />
+  <xs:complexType name="CreateInvoiceRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/EmoneyDistributorService.Common" base="q1:Request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ExpirationTimeHours" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Products" nillable="true" type="tns:ArrayOfInvoiceProduct" />
+          <xs:element minOccurs="0" name="UnId" nillable="true" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CreateInvoiceRequest" nillable="true" type="tns:CreateInvoiceRequest" />
+  <xs:complexType name="ArrayOfInvoiceProduct">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InvoiceProduct" nillable="true" type="tns:InvoiceProduct" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInvoiceProduct" nillable="true" type="tns:ArrayOfInvoiceProduct" />
+  <xs:complexType name="InvoiceProduct">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Unit" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InvoiceProduct" nillable="true" type="tns:InvoiceProduct" />
+  <xs:complexType name="CreateInvoiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpirationDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvoiceId" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="UnId" nillable="true" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateInvoiceResponse" nillable="true" type="tns:CreateInvoiceResponse" />
+  <xs:complexType name="GetInvoiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpirationTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvoiceId" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="IsPayed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PayedAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Payments" nillable="true" type="tns:ArrayOfInvoicePayment" />
+      <xs:element minOccurs="0" name="Products" nillable="true" type="tns:ArrayOfInvoiceProduct" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="UnId" nillable="true" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetInvoiceResponse" nillable="true" type="tns:GetInvoiceResponse" />
+  <xs:complexType name="ArrayOfInvoicePayment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InvoicePayment" nillable="true" type="tns:InvoicePayment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInvoicePayment" nillable="true" type="tns:ArrayOfInvoicePayment" />
+  <xs:complexType name="InvoicePayment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="TransactionCode" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="TransactionId" type="xs:unsignedInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InvoicePayment" nillable="true" type="tns:InvoicePayment" />
+</xs:schema>

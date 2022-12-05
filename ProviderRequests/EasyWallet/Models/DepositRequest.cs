@@ -11,7 +11,7 @@ namespace ProviderRequests.EasyWallet.Models
         public string MerchantOrderId { get; set; }
 
         [JsonProperty("Amount")]
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
 
         [JsonProperty("Checksum")]
         public string CheckSum { get; set; }
